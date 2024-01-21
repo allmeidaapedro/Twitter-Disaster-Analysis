@@ -366,11 +366,11 @@ def evaluate_classifier(y_true, y_pred, probas):
 
 def plot_probability_distributions(y_true, probas):
     '''
-    Plots the kernel density estimate (KDE) of predicted probabilities for absent and present candidates.
+    Plots the kernel density estimate (KDE) of predicted probabilities for disaster related and non-related tweets.
 
     Parameters:
-    - y_true (array-like): The true class labels (0 for present, 1 for absent).
-    - probas (array-like): Predicted probabilities for the positive class (absent candidates).
+    - y_true (array-like): The true class labels (0 for not related tweets, 1 for disaster related tweets).
+    - probas (array-like): Predicted probabilities for the positive class (disaster related tweets).
 
     Raises:
     - CustomException: Raised if an unexpected error occurs during plotting.
@@ -388,17 +388,17 @@ def plot_probability_distributions(y_true, probas):
     Note:
     - The function assumes the existence of color constants VERDE1, VERMELHO1, CINZA1, CINZA9.
 
-    The function creates a KDE plot illustrating the distribution of predicted probabilities for absent and present candidates.
+    The function creates a KDE plot illustrating the distribution of predicted probabilities for disaster related and non-related tweets.
     It provides visual insights into the model's ability to distinguish between the two classes.
 
     '''
     try:
-        probas_df = pd.DataFrame({'Probabilidade de Abstenção': probas,
-                                'Abstenção': y_true})
+        probas_df = pd.DataFrame({'Probabilidade de Tweet Estar Relacionado a Desastre': probas,
+                                'Tweet Relacionado a Desastre': y_true})
 
         fig, ax = plt.subplots(figsize=(10, 4))
-        sns.kdeplot(data=probas_df, x='Probabilidade de Abstenção', hue='Abstenção', fill=True, ax=ax, palette=[VERDE1, VERMELHO1])
-        ax.set_title('Distribuição das Probabilidades Preditas entre Candidatos Presentes e Ausentes', fontweight='bold', fontsize=12, color=CINZA1, pad=20)
+        sns.kdeplot(data=probas_df, x='Probabilidade de Tweet Estar Relacionado a Desastre', hue='Tweet Relacionado a Desastre', fill=True, ax=ax, palette=[VERDE1, VERMELHO1])
+        ax.set_title('Distribuição das Probabilidades Preditas entre Tweets Relacionados a Desastres e Não Relacionados', fontweight='bold', fontsize=12, color=CINZA1, pad=20)
         ax.set_xlabel('Probabilidades Preditas', fontsize=10.8, color=CINZA1, labelpad=20)
         ax.set_ylabel('Densidade', fontsize=10.8, color=CINZA1, labelpad=20)
         ax.set_xticks([0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
@@ -417,11 +417,11 @@ def plot_probability_distributions(y_true, probas):
 
 def plot_scores_percentages(y_true, probas):
     '''
-    Plots the percentage of present and absent instances grouped by predicted probability score ranges.
+    Plots the percentage of disaster related and non-relared tweets grouped by predicted probability score ranges.
 
     Parameters:
-    - y_true (array-like): The true class labels (0 for present, 1 for absent).
-    - probas (array-like): Predicted probabilities for the positive class (absent candidates).
+    - y_true (array-like): The true class labels (0 for non-related tweets, 1 for disaster related tweets).
+    - probas (array-like): Predicted probabilities for the positive class (disaster related tweets).
 
     Raises:
     - CustomException: Raised if an unexpected error occurs during plotting.
@@ -436,7 +436,7 @@ def plot_scores_percentages(y_true, probas):
     - seaborn
     - matplotlib
 
-    The function creates a horizontal stacked bar chart illustrating the percentage of present and absent instances
+    The function creates a horizontal stacked bar chart illustrating the percentage of disaster related and non-related tweets
     for different predicted probability score ranges. It helps visualize the distribution of predicted probabilities.
 
     Note:
@@ -444,22 +444,22 @@ def plot_scores_percentages(y_true, probas):
 
     '''
     try:
-        probas_df = pd.DataFrame({'Probabilidade de Abstenção': probas,
-                                'Abstenção': y_true}).reset_index(drop=True)
+        probas_df = pd.DataFrame({'Probabilidade de Tweet Estar Relacionado a Desastre': probas,
+                                'Tweet Relacionado a Desastre': y_true}).reset_index(drop=True)
         thresholds = np.arange(0.0, 1.1, 0.1)
         labels = [f'{t:.1f} a {t + 0.1:.1f}' for t in thresholds[:-1]]
-        probas_df['Faixa de Score'] = pd.cut(probas_df['Probabilidade de Abstenção'], bins=thresholds, labels=labels, include_lowest=True)
+        probas_df['Faixa de Score'] = pd.cut(probas_df['Probabilidade de Tweet Estar Relacionado a Desastre'], bins=thresholds, labels=labels, include_lowest=True)
 
-        probas_grouped = probas_df.groupby(['Faixa de Score'])[['Abstenção']].mean().reset_index().rename(columns={'Abstenção': 'Ausente'})
-        probas_grouped['Presente'] = 1 - probas_grouped['Ausente']
+        probas_grouped = probas_df.groupby(['Faixa de Score'])[['Tweet Relacionado a Desastre']].mean().reset_index().rename(columns={'Tweet Relacionado a Desastre': 'Disaster Related Tweet'})
+        probas_grouped['Disaster Non-Related Tweet'] = 1 - probas_grouped['Disaster Related Tweet']
 
         fig, ax = plt.subplots(figsize=(15, 4))
 
         # Plot the horizontal stacked bar chart
-        sns.barplot(x="Presente", y="Faixa de Score", data=probas_grouped, color=VERDE1, label="Presente", ax=ax, left=probas_grouped['Ausente'])
-        sns.barplot(x="Ausente", y="Faixa de Score", data=probas_grouped, color=VERMELHO1, label="Ausente", ax=ax)
+        sns.barplot(x="Disaster Non-Related Tweet", y="Faixa de Score", data=probas_grouped, color=VERDE1, label="Tweet NÃO Relacionado a Desastre", ax=ax, left=probas_grouped['Disaster Related Tweet'])
+        sns.barplot(x="Disaster Related Tweet", y="Faixa de Score", data=probas_grouped, color=VERMELHO1, label="Tweet Relacionado a Desastre", ax=ax)
 
-        ax.set_title('Percentual de Presentes e Ausentes por Faixa de Score', color=CINZA1, fontweight='bold', fontsize=12, pad=20)
+        ax.set_title('Percentual de Tweets Relacionados a Desastres e Não Relacionados por Faixa de Score', color=CINZA1, fontweight='bold', fontsize=12, pad=20)
         ax.set_yticks(ticks=range(10), labels=labels, color=CINZA1, fontsize=11.2)
         ax.set_ylabel('')
         ax.get_xaxis().set_visible(False)
@@ -487,7 +487,7 @@ def plot_scores_percentages(y_true, probas):
             x = bar.get_x()
             y = bar.get_y()
             
-            percentage = probas_grouped['Presente'].iloc[i] * 100  
+            percentage = probas_grouped['Disaster Non-Related Tweet'].iloc[i] * 100  
             ax.text(x + width / 2, y + height / 2, f"{percentage:.1f}%", ha="center", va="center", color="white", fontsize=10.8)
 
         handles, labels = ax.get_legend_handles_labels()
