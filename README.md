@@ -1,22 +1,22 @@
 # Análise de Tweets - Desastre ou não?
 
-<img src="Twitter-Third-Party-Apps.webp" width="100%" height="30%">
+<img src="Twitter-Third-Party-Apps.webp" width="100%" height=350px>
 
-- Este é um projeto de classificação binária, utilizando NLP, para analisar um conjunto de tweets e determinar quais estão relacionados a desastres reais e quais não estão.
+- Este é um projeto de <b>classificação binária</b>, utilizando <b>NLP</b>, para analisar um conjunto de <b>tweets</b> e <B>determinar quais estão relacionados a desastres reais e quais não estão.</b>
 - Este projeto é a resolução de um case para uma vaga como cientista de dados.
-- Para entender todo o processo, incluindo o problema de negócio, análise exploratória de dados, modelagem e deploy, acesse a documentação do projeto acima no arquivo 'analise_tweets_desastres.pdf' ou no arquivo 'analise_tweets_desastres.pptx'.
+- Para entender todo o processo, incluindo o problema de negócio, análise exploratória de dados, modelagem e deploy, acesse a <b>documentação do projeto acima no arquivo 'analise_tweets_desastres.pdf' ou no arquivo 'analise_tweets_desastres.pptx'.</b>
 
 # Estrutura de pastas do projeto
-- Artifacts: Contém os artefatos do modelo de machine learning (model .pkl, preprocessor .pkl, dados brutos, de treino e teste), após a execução do pipeline de treinamento.
-- Input: Contém os dados brutos, utilizados em todos os notebooks e arquivos do projeto.
-- Notebooks: Contém os notebooks de análise exploratória de dados e modelagem preditiva.
-- Src: Contém todos os scripts .py, incluindo utils, exceções, logger, componentes de ingestão de dados, transformação de dados e treinamento de modelo, e pipelines de treino e predição para deploy do modelo.
-- Templates: Contém as páginas de predição da probabilidade de um tweet estar relacionado a um desastre.
-- Arquivos importantes: 
-    - setup.py: Contém metadados acerca do projeto, além de dependências.
-    - requirements.txt: Contém as bibliotecas utilizadas no projeto e suas versões, a fim de prover reprodutibilidade em qualquer dispositivo.
-    - app.py: API em Flask, responsável pela requisição de um tweet de formulário e utilização deste para predição.
-    - analise_tweets_desastre.py e .pptx: Documentação do projeto contendo todo o pipeline detalhado, desde a definição do problema de negócio ao deploy.
+- <B>Artifacts:</b> Contém os artefatos do modelo de machine learning (model .pkl, preprocessor .pkl, dados brutos, de treino e teste), após a execução do pipeline de treinamento.
+- <B>Input:</b> Contém os dados brutos, utilizados em todos os notebooks e arquivos do projeto.
+- <B>Notebooks:</b> Contém os notebooks de análise exploratória de dados e modelagem preditiva.
+- <B>Src:</b> Contém todos os scripts .py, incluindo utils, exceções, logger, componentes de ingestão de dados, transformação de dados e treinamento de modelo, e pipelines de treino e predição para deploy do modelo.
+- <B>Templates:</b> Contém as páginas de predição da probabilidade de um tweet estar relacionado a um desastre.
+- <B>Arquivos importantes:</b> 
+    - <B>setup.py:</b> Contém metadados acerca do projeto, além de dependências.
+    - <B>requirements.txt:</b> Contém as bibliotecas utilizadas no projeto e suas versões, a fim de prover reprodutibilidade em qualquer dispositivo.
+    - <B>app.py:</b> API em Flask, responsável pela requisição de um tweet de formulário e utilização deste para predição.
+    - <B>analise_tweets_desastre.py e .pptx:</b> Documentação do projeto contendo todo o pipeline detalhado, desde a definição do problema de negócio ao deploy.
 
 # Execute o projeto na sua máquina local
 - Pré-requisitos:
@@ -76,6 +76,6 @@ deactivate
 </pre>
 
 # Contato
-- Linkedin: https://www.linkedin.com/in/pedro-henrique-almeida-oliveira-77b44b237/
-- Github: https://github.com/allmeidaapedro
-- Gmail: pedrooalmeida.net@gmail.com
+- <b>Linkedin:</b> https://www.linkedin.com/in/pedro-henrique-almeida-oliveira-77b44b237/
+- <b>Github:</b> https://github.com/allmeidaapedro
+- <b>Gmail:</b> pedrooalmeida.net@gmail.com
