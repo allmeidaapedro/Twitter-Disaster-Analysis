@@ -1,6 +1,6 @@
 # Análise de Tweets - Desastre ou não?
 
-<img src="Twitter-Third-Party-Apps.webp" width="100%" height=350px>
+<img src="logo_twitter.webp" width="100%" height=350px>
 
 - Este é um projeto de <b>classificação binária</b>, utilizando <b>NLP</b>, para analisar um conjunto de <b>tweets</b> e <B>determinar quais estão relacionados a desastres reais e quais não estão.</b>
 - Este projeto é a resolução de um case para uma vaga como cientista de dados.
